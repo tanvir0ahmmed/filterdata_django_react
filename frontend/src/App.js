@@ -4,6 +4,8 @@ import Login from "./Login";
 import Registration from "./Registration";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
+
+//root component which contain all component and controll route from here
 function App() {
   return (
     <div className="App">

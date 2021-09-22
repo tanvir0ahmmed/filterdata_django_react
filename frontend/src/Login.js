@@ -7,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [token, setToken] = useCookies(["mytoken"]);
   let history = useHistory();
+
   useEffect(() => {
     if (token["mytoken"]) {
       history.push({
@@ -33,21 +34,10 @@ const Login = () => {
 
   const LogData = (response) => {
     if ("error" in response) {
-      showError();
+      console.log("Errro", response);
     } else {
       setToken("mytoken", response.token);
     }
-  };
-
-  const showError = () => {
-    alert("correct username");
-    let inpElement = document.getElementsByClassName("log-inp");
-    let el1 = inpElement[0];
-    let el2 = inpElement[1];
-    el1.style.borderColor = "red";
-    el2.style.borderColor = "red";
-    el1.placeholder = "wrong username or password";
-    el2.placeholder = "wrong username or password";
   };
 
   const handleSwitch = () => {

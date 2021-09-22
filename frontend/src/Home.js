@@ -4,7 +4,6 @@ import ApiService from "./ApiService";
 import { useCookies } from "react-cookie";
 import queryString from "query-string";
 const Home = () => {
-  console.log("home js");
   const [results, setResult] = useState(null);
   const [inpValue, setInpValue] = useState("");
   const [srcValue, setSrcValue] = useState();
@@ -15,7 +14,7 @@ const Home = () => {
   const [token, setToken, removeToken] = useCookies(["mytoken"]);
 
   let history = useHistory();
-
+  /* This hooks used for initial rendering and controll router & menual url parms */
   useEffect(() => {
     if (token["mytoken"]) {
       const queries = queryString.parse(window.location.search);
@@ -33,10 +32,12 @@ const Home = () => {
     }
   }, [history, token, uid]);
 
+  /* this function find result that a value contain in an array or not, and send post request to api to store input data */
   const handleResult = () => {
     let inpt = inpValue;
     const myArr = inpt.split(",");
     let inp = myArr.map((i) => Number(i));
+
     inp.sort(function (a, b) {
       return b - a;
     });
@@ -54,6 +55,7 @@ const Home = () => {
       .catch((error) => console.log(error));
   };
 
+  /* this function filtering databased on user id, start datetime, & end datetime */
   const handleFilter = () => {
     let st = startDate;
     let ed = endDate;
@@ -84,6 +86,8 @@ const Home = () => {
       search: `?user=${uid}&start-date=${st}&end-date=${ed}`,
     });
   };
+
+  /* this funcction responsible for logout user */
   const handlelogOut = () => {
     ApiService.LogOut(token["mytoken"])
       .then((response) => setToken("mytoken", ""))
@@ -106,6 +110,7 @@ const Home = () => {
             </div>
 
             <div className="row">
+              {/* Search section */}
               <div className="col-md-6">
                 <div className="card m-2">
                   <h4 className="card-title p-3">Search Input</h4>
@@ -159,6 +164,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
+              {/* Filter section */}
               <div className="col-md-6 d-flex justify-content-start">
                 <div className="card m-2">
                   <div className="card-header">Filter</div>
@@ -220,6 +226,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            {/* Filtered data view section */}
             <div className="row">
               <div className="col-md-12">
                 <div className="card mt-2">
