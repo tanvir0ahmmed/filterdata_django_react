@@ -1,26 +1,27 @@
 export default class ApiService {
   static FilterData(user_id, st, ed, token) {
     console.log(user_id, st, ed);
-    return fetch(`http://127.0.0.1:8000/input/${user_id}/${st}/${ed}/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    }).then((response) => response.json());
+    return fetch(
+      `https://filter-data.herokuapp.com/input/${user_id}/${st}/${ed}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    ).then((response) => response.json());
   }
 
   static AddUser(body) {
-    //https://django-rest-api-01.herokuapp.com/users/
     console.log(body);
-    return fetch(`http://127.0.0.1:8000/users/`, {
+    return fetch(`https://filter-data.herokuapp.com/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     }).then((response) => {
-      //console.log(response);
       if (response.ok) {
         return response.json();
       } else {
@@ -29,8 +30,7 @@ export default class ApiService {
     });
   }
   static AddInput(body, token) {
-    //console.log(article_id, body)
-    return fetch(`http://127.0.0.1:8000/input/`, {
+    return fetch(`https://filter-data.herokuapp.com/input/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,10 +40,8 @@ export default class ApiService {
     }).then((response) => response.json());
   }
   static LogIn(body) {
-    //https://django-rest-api-01.herokuapp.com/login/
-    return fetch("http://127.0.0.1:8000/login/", {
+    return fetch("https://filter-data.herokuapp.com/login/", {
       method: "POST",
-      //method: 'GET',
       headers: {
         "Content-Type": "application/json",
       },
@@ -52,8 +50,7 @@ export default class ApiService {
   }
 
   static LogOut(token) {
-    return fetch("http://127.0.0.1:8000/logout/", {
-      //'method': 'POST',
+    return fetch("https://filter-data.herokuapp.com/logout/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

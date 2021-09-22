@@ -24,8 +24,8 @@ SECRET_KEY = 'django-insecure-8y2+%0&hd9d4d@hjr1)@rfol1gmq5ilg@yxuzk+)mw_un^mk)e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+#'filter-data.herokuapp.com'
+ALLOWED_HOSTS = ['filter-data.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -56,8 +56,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    'https://tanvir-filter-data.herokuapp.com',
+]
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
+    'localhost:3000',
+    'tanvir-filter-data.herokuapp.com',
     
 )
 
