@@ -1,0 +1,45 @@
+.form-label {
+  font-size: 30px;
+  color: rgba(21, 114, 182, 1);
+  margin-right: 2%;
+}
+input {
+  border-radius: 5px;
+  background-color: rgba(51, 56, 66, 1);
+  color: whitesmoke;
+  width: 100%;
+}
+.card {
+  background-color: rgba(40, 44, 52, 0.6);
+  box-shadow: 2px 3px 2px 3px rgba(26, 115, 232, 0.6);
+}
+.card-body {
+  background-color: rgba(40, 44, 52, 1);
+}
+.card-header,
+.card-title {
+  color: white;
+  font-size: 30px;
+}
+.btn {
+  margin-top: 2%;
+}
+.switch {
+  color: rgba(228, 13, 13, 0.6);
+}
+.switch:hover {
+  color: rgb(21, 114, 182);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+li {
+  list-style: none;
+  color: rgb(255, 255, 255);
+  background-color: rgba(56, 117, 169, 0.8);
+  padding: 1%;
+  max-width: 100%;
+}
+ul {
+  background-color: rgba(40, 44, 52, 0.9);
+  padding: 1%;
+}
