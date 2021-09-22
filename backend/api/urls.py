@@ -5,10 +5,10 @@ router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/',views.LogInViewSet.as_view()),
-    path('logout/',views.LogOutViewSet.as_view()),
-    path('input/',views.InputView.as_view()),
-    path('all-input/',views.InputAllView.as_view()),
-    path('input/<int:pk>/<slug:st>/<slug:ed>/',views.InputDetail.as_view()),
+    path('login/',views.LogInViewSet.as_view()),#use this api endpoint for login
+    path('logout/',views.LogOutViewSet.as_view()),#use this api endpoint for logout
+    path('input/',views.InputView.as_view()),#use this api endpoint for view authenticated user input data
+    path('all-input/',views.InputAllView.as_view()),#use this api endpoint for get all user data
+    path('input/<int:pk>/<slug:st>/<slug:ed>/',views.InputDetail.as_view()),#use this api endpoint for get user input data based on user id, start datetime, & end datetime
 
 ]

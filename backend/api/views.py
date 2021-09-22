@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import InputData
 from django.contrib.auth.models import User
-from .serializers import InputSerializer, UserSerializer, LogInSerializer
+from .serializers import InputSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
@@ -13,7 +13,8 @@ from rest_framework import status,viewsets
 from django.contrib.auth import authenticate
 
 
-# Create your views here.
+# this class will receive get & post request to store user input data and view previous data for authenticated user. 
+# Also this class protected by permission classes based on token authentication.
 class InputView(APIView):
     permission_classes=[IsAuthenticated]
     authentication_classes=(TokenAuthentication,)
@@ -45,7 +46,8 @@ class InputView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
+# this class provide all stored input data, and not required permission
 class InputAllView(APIView):
     
     def get(self, request):
@@ -53,7 +55,7 @@ class InputAllView(APIView):
         serializer = InputSerializer(article, many=True)
         return Response(serializer.data)
     
-    
+#this class provide data based on filter value such user id, start datetime & end datetime    
 class InputDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
@@ -85,29 +87,14 @@ class InputDetail(APIView):
         return Response(serializer.data)
     
 
-class AllDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
-        try:
-            return InputData.objects.filter(user=pk)
-        except InputData.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk=0,st="",ed="", format=None):
-        snippet = self.get_object(pk)
-        serializer = InputSerializer(snippet, many=True)
-        return Response(serializer.data)
-
-  
+#this class will accept all request methods for user model.  
 class UserViewSet(viewsets.ModelViewSet):
     authentication_classes=(TokenAuthentication,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
 
-    
+#this class responsible for authenticating user based on token authentication. this token authentication will create token for one time   
 class LogInViewSet(APIView):
     authentication_classes=(TokenAuthentication,)
     def post(self, request, format=None):
@@ -118,7 +105,8 @@ class LogInViewSet(APIView):
             return Response({'username':user.username, 'id':user.id, 'token':token.key}, status=status.HTTP_201_CREATED)
         
         return Response({'error':'username or password is not match'}, status=status.HTTP_400_BAD_REQUEST)
-    
+
+#Logout user, and remove token from db & session
 class LogOutViewSet(APIView):
     permission_classes=[IsAuthenticated]
     authentication_classes=(TokenAuthentication,)
