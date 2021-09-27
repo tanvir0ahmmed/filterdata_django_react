@@ -1,4 +1,4 @@
-# Project Name: ‘Ami Coding Pari Na’
+# Project Name: ‘Filter search data’
  ## How to run this project :question:
   ### :point_right: First clone this repo
   ### :point_right: Then go to the `<backend>` folder and install all dependencies using pipenv file.
